@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "Listcart";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<style>
+    #ime {
+        width: 50px;
+        height: 50px;
+    }
+</style>
+<div id="example">
+    <div id="grid">
+    </div>
+    @if(ViewBag.message3 == "Sucessfully Remove")
+    {
+        ViewBag.message3= "Sucessfully Remove";
+    }
+    <br><br><br><br>
+    <div style="margin-left:1000px">
+        <label>Sub-Total:</label>
+        <label style="font-family: 'HK Grotesk Medium';" id="totprise"></label>.00$
+        <hr>
+        <a class="btn k-primary k-button" id="dis" href="http://localhost:58979/AlbumStore/Checkout" target="_blank">Checkout</a>
+
+    </div>
+    
+    <script>
+        $(document).ready(function () {
+            gettotal();
+            $("#grid").kendoGrid({
+                columns: [
+                    { field: "al_img", title: "Image", template: '<img id="ime" src="#=al_img#">'},
+                    { field: "a_title", title: "Name",  type: "string" },
+                    { field: "a_price", title: "Price", format: "{0:c}" },
+                  { field: "cart_itemqua", title: "Quantity", template: '<input type="number"  id="#=a_id#" class="k-textbox" value="#:cart_itemqua#" min="1"  onchange="myPrice(\'#=a_id#\',#:a_price#)">'},
+                  { field: "Total", title: "Total", template: "<label id='tot_#=a_id#' >#:(a_price*cart_itemqua)#</label>", format: "{0:c}" },
+                    { title: "Item Remove", template: `<a class="btn btn-icn-hover btn-icn-trans text-danger delete-btn"   href="http://localhost:58979/AlbumStore/RemoveItem?photo_id=#:a_id#"><span class="k-icon k-i-delete"></a>` }
+                ],
+                dataSource: {
+                   
+                    transport: {
+                        read: "/AlbumStore/ListCart",
+                    },
+                   
+                },
+                scrolable:false,
+               
+                height: 400,
+            });
+        });
+        $("#numeric").kendoNumericTextBox();
+
+        function myPrice(id, pr) {
+            gettotal();
+            var x = document.getElementById(id).value;
+            var y = parseInt(x);
+            var obj = {
+                photo_id: id,
+                cart_itemqua: y,
+            };
+            $.ajax({
+                url: "/AlbumStore/UpdatePrise",
+                type: "POST",
+                data: JSON.stringify(obj),
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    $("#totprise").html(pr * y);
+                    $("#tot_" + id).html(pr * y);
+                }
+            });
+            gettotal();
+        }
+        function gettotal() {
+            $.ajax({
+                url: "/AlbumStore/TotalPrise",
+                type: "get",
+                dataType: 'json',
+                success: function (result) {
+                    $("#totprise").html(result);
+                }
+            });
+        }
+        //function getTotal() {
+        //    var quantity = parseInt($("#txtQuantity").val());
+        //    var price = parseInt($("#hdnprice").val());
+        //    $("#lblTotalAmount").html(quantity * price);
+        //}
+    </script>
+    </div>
+    <br />
+    <style type="text/css">
+        .customer-photo {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-size: 32px 35px;
+            background-position: center center;
+            vertical-align: middle;
+            line-height: 32px;
+            box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+            margin-left: 5px;
+        }
+
+        .customer-name {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 32px;
+            padding-left: 3px;
+        }
+    </style>
+
+
+
+
+
+
+
+
+
+
+

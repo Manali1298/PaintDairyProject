@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html {
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .navbar .second-navbar {
+            margin-top: 30px;
+        }
+
+        .navbar .navbar-link {
+            color: orangered;
+        }
+    </style>
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js" />
+
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.common.min.css" />
+
+
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/jquery.min.js"></script>
+
+
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default-v2.min.css" />
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.aspnetmvc.min.js"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Welcome To MiniStore", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav"></ul>
+        </div>
+
+    </div>
+
+
+    @*@if (User.Identity.IsAuthenticated)
+        {
+            int i = 0;
+            while (i < 1)
+            {
+                i++;
+            <script>
+            kendo.alert(
+                 "Sucessfully Login....Happy To enjoy MiniStore"
+            );
+            </script>
+
+            }
+
+
+        }*@
+
+
+
+    <div class="navbar second-navbar ">
+
+
+        <div id="example">
+
+            <ul id="menu">
+                @*<li>
+                    <a href="/Home/Index">Dashboard</a>
+                </li>*@
+                <li>
+                    <a href="/AlbumStore/AlbumAdminSideList">Dashboard</a>
+                </li>
+                @if (User.Identity.Name=="manaligujju@gmail.com")
+                {
+                    <li>
+                        <a>manaligujju@gmail.com</a>
+                        <ul>
+                            <li>MyAccount</li>
+                            <li><a href="/User/SignOut">SignOut</a></li>
+                        </ul>
+                    </li>
+                }
+                <li>
+                    <a href="/AlbumStore/sellchart">Chart</a>
+                </li>
+                @*else
+                {
+                    <li>
+                        Action
+                        <ul>
+                            <li>
+                                Admin
+                                <ul>
+
+                                    <li><a href="/Home/LoginPanel">SignIn</a></li>
+                                    <li><a href="/Home/Register">Register</a></li>
+                                </ul>
+
+
+                            </li>
+                            <li>
+                                User
+                                <ul>
+                                    <li><a href="/Home/LoginPanel">SignIn</a></li>
+                                    <li><a href="/Home/Register">Register</a></li>
+                                </ul>
+                            </li>
+
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/Home/ManageProduct">ManageProduct</a>
+                    </li>
+                    <li>
+                        <a href="/Home/ManageProduct">ManageUser</a>
+                    </li>
+
+
+
+
+                }*@
+            </ul>
+        </div>
+        <style>
+            #menu h2 {
+                font-size: 1em;
+                text-transform: uppercase;
+                padding: 5px 10px;
+            }
+
+
+            #template {
+                width: 380px;
+            }
+
+                #template ol {
+                    float: left;
+                    margin: 0 0 0 30px;
+                    padding: 10px 10px 0 10px;
+                }
+
+                #template:after {
+                    content: ".";
+                    display: block;
+                    height: 0;
+                    clear: both;
+                    visibility: hidden;
+                }
+
+                #template .k-button {
+                    float: left;
+                    clear: left;
+                    margin: 5px 0 5px 12px;
+                }
+        </style>
+        <script>
+            $(document).ready(function() {
+                $("#menu").kendoMenu();
+            });
+        </script>
+    </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Happy MiniStore...!!!!</p>
+        </footer>
+    </div>
+
+
+</body>
+</html>
+  @*session_start();*@

@@ -1,0 +1,60 @@
+﻿@*@model FinalProjectKendo.Models.UserData*@
+
+@{
+    ViewBag.Title = "LoginPanel";
+ 
+}
+<style>
+    #center1 {
+        margin: auto;
+        width: 60%;
+        padding: 10px;
+    }
+</style>
+
+<div class="mt-container pd-0" id="center1">
+    <br />
+    <br />
+   
+    <div class="form-login">
+        <div class="mt-container pd-0" id="center1">
+            <form action="/User/LoginPanel" method="post">
+                <h2>
+                    Sign In
+                </h2><div style="background-color:orangered;width:120px;height:4px;"></div>
+                <hr />
+                <br />
+                <div class="login-user-screen">
+                    <div class="form-group">
+                        <label for="txtUsername">Username</label>
+                        <div class="form-group-content">
+                            <input type="text" name="u_email" id="txtUsername" class="mt-input k-textbox" placeholder="john@gmail.com" required>
+                            <span class="input-bar"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtPassword">Password</label>
+                        <div class="form-group-content">
+                            <input type="password" name="u_password" id="txtPassword" class="mt-input k-textbox" required>
+                            <span class="input-bar"></span>
+                        </div>
+                    </div>
+                    <div class="input-check">
+                       @if(ViewBag.message1== "SucessFully Login")
+                       {
+                           ViewBag.message1 = "SucessFully Login";
+                       }
+                       else
+                       {
+                           ViewBag.message2 = "Invalid Credential";
+                       }
+                    </div>
+                    <div class="form-group">
+                        <button class="btn k-primary btn-sm k-button btn-raised">Sign In</button>
+                    </div>
+                    <div><a class="k-link" href="@Url.Action("RegisterPanel","User")">New User?.Sign-Up</a></div>
+                </div>
+            </form>
+        </div>
+</div>
+</div>

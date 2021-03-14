@@ -1,0 +1,332 @@
+﻿@model IEnumerable<FinalProjectKendo.Models.AlbumData>
+
+@{
+    ViewBag.Title = "AlbumList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+
+}
+
+
+<!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            #ime {
+                width: 90px;
+                height: 90px;
+            }
+            </style>
+            <style > html {
+                font-size: 14px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        </style>
+
+        <title></title>
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default-v2.min.css" />
+
+        <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/jquery.min.js"></script>
+        @*<link href="~/Content/styleguide.css" rel="stylesheet" />*@
+
+        <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js"></script>
+
+
+
+    </head>
+
+    <body>
+
+        <div id="example">
+          
+            <div>
+                <h4>
+                    Manage Album Record List
+                </h4><div style="background-color:orangered;width:220px;height:4px;"></div>
+                <hr />
+                <a class="k-button k-button-icontext k-add-button" onclick = "myFunction()"><span class="k-icon k-i-add"></span>Add new record</a>
+            </div>
+            <br />
+            <div id="grid"></div>
+
+            <div id="window"></div>
+            <script>
+               
+                $("#edit").click(function (e) {
+
+                });
+                $(document).ready(function () {
+                    $("#primaryTextButton").kendoButton();
+                });
+
+            $(document).ready(function () {
+               $("#grid").kendoGrid({
+                    dataSource: {
+
+
+                        transport: {
+                           read: {
+                    url: "http://localhost:58979/AlbumStore/GetUserData",
+                    dataType: "json",
+                    type: "Get"
+                            }
+                          
+
+                        },
+                        pageSize: 20
+                    },
+                    height: 550,
+                    groupable: true,
+                    sortable: true,
+                    pageable: {
+                        refresh: true,
+                        pageSizes: true,
+                        buttonCount: 5
+                    },
+
+                    columns: [
+
+                       { field: "al_img", title: "Paint", template: '<img id="ime" src="#=al_img#" >'},
+
+                  
+                  { field: 'a_artist', title: "Artist", type: "string" },
+                  { field: 'a_title', title: "Title", type: "string" },
+                  { field: 'a_price', title: "Price", type: "number", format: "{0:c}" },
+                     { field: "quantity", title: "Quantity" },
+             
+                  //{ field: "a_price", title: "Quantity" },
+
+                  {
+                      title: "Action",
+                      template: '<div class="grid-action"><a type="button" href="javascript:void(0);"  data-toggle="tooltip" data-placement="bottom" title="EditProduct" class="btn btn-icn-hover btn-icn-trans text-muted drawer-open edit-details "   data-id="#:a_id#"  onclick ="myFunctionn(this)" ><span class="k-icon k-i-track-changes-enable" style="color:blue;"></span></a>|<a type="button"  href="http://localhost:58979/AlbumStore/Delete?id=#:a_id#"  id="delete" data-toggle="tooltip" data-placement="bottom" title="DeleteProduct"  class="btn btn-icn-hover btn-icn-trans text-danger delete-btn"><span class="k-icon k-i-delete"></span></a></div>'
+                      /// template: '<div class="grid-action"><a type="button"  href="http://localhost:58979/AlbumStore/GetSpecificAlbum?id=2"  id="delete"  class="btn btn-</a></div>'
+                  },
+           
+
+                    ],
+
+               });
+                
+            });
+           
+            </script>
+         
+        </div>
+
+        <style type="text/css">
+            .customer-photo {
+                display: inline-block;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background-size: 32px 35px;
+                background-position: center center;
+                vertical-align: middle;
+                line-height: 32px;
+                box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+                margin-left: 5px;
+            }
+
+            .customer-name {
+                display: inline-block;
+                vertical-align: middle;
+                line-height: 32px;
+                padding-left: 3px;
+            }
+        </style>
+
+
+
+
+    </body>
+    </html>
+
+<br />
+<br />
+<br />
+<hr />
+<div id="upload" >
+    <div class="mt-container pd-0" id="center1">
+        <div class="form-login">
+            <form action="/AlbumStore/UploadAlbum" method="post" enctype="multipart/form-data">
+                <h4 class="text-left">Upload Album</h4><div style="background-color:orangered;width:150px;height:4px;"></div>
+                <hr />
+                <div class="form-group">
+                    <label for="al_img"></label>
+                    <input name="al_img" class="files" type="file" aria-label="files" title="files" />
+                </div>
+
+                <div class="form-group">
+                    <label for="useralbumphoto_artist">Artist Name:</label>
+                    <div class="form-group-content">
+                        <input type="text" name="a_artist" class="k-textbox" placeholder="John" title="textbox" required>
+                    </div>
+                </div>
+                @*<div id="artist_name" class="form-group">
+                        <input type="text" class="k-textbox" name="useralbumphoto_artist" placeholder="Artist Name" required>
+                    </div>*@
+                <div class="form-group">
+                    <label for="useralbumphoto_name">Photo Name:</label>
+                    <div class="form-group-content">
+                        <input type="text" name="a_title" class="k-textbox" placeholder="Nature" title="textbox" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="useralbumphoto_prise">Price:</label>
+                    <div class="form-group-content">
+                        <input type="text" name="a_price" class="k-textbox" placeholder="500" title="textbox" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <div class="form-group-content">
+                        <input type="text" name="quantity" class="k-textbox" placeholder="500" title="textbox" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="alertBtn" class="btn k-primary k-button btn-sm">Add Photo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+ <script>
+ function myFunction() {
+     var objWin = $("#upload"),
+        undo = $("#undo");
+    undo.click(function() {
+        objWin.data("kendoWindow").open();
+        undo.fadeOut();
+    });
+
+    function onClose() {
+        undo.fadeIn();
+    }
+    objWin.kendoWindow({
+        width: "600px",
+        height: "500px",
+        title: "UploadPanel",
+        visible: false,
+        close: onClose
+    }).data("kendoWindow").center().open();
+ }
+
+
+ //Alert window
+ $("#alertBtn").on("click", function () {
+     myalert("Record successfully added");
+     function myalert(content) {
+         $("<div></div>").kendo.alert({
+             title:"Upload Data",
+             content: content,
+             buttonLayout: "normal"
+         }).data("kendoAlert").open();
+     }
+ });
+
+ </script>  
+<script type="text/x-kendo-template" id="edit">
+    <form action="/AlbumStore/EditPhoto" method="post" enctype="multipart/form-data">
+        <input type="hidden" value="#:a_id#" id="hdnalbid" />
+        <input type="hidden" value="#:a_price#" id="hdnprice" />
+        @*<div id="edit">*@
+            <div class="mt-container pd-0" id="center1">
+                <div class="form-login">
+                    @*<form action="/AlbumStore/EditPhoto" method="post" enctype="multipart/form-data">*@
+                        <h4 class="text-left">Update Album</h4><div style="background-color:orangered;width:150px;height:4px;"></div>
+                        <hr />
+
+                        <div class="form-group">
+                            <label for="useralbumphoto_artist">Artist Name:</label>
+                            <div class="form-group-content">
+                                <input type="text" name="a_artist" class="k-textbox" placeholder="Manali" value="#:a_artist#" title="textbox" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="useralbumphoto_name">Album Name:</label>
+                            <div class="form-group-content">
+                                <input type="text" name="a_title" class="k-textbox" placeholder="Nature" value="#:a_title#" title="textbox" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="useralbumphoto_prise">Price:</label>
+                            <div class="form-group-content">
+                                <input type="text" name="a_price" class="k-textbox" placeholder="500" value="#:a_price#" title="textbox" required>
+                            </div>
+                        </div>
+                       <div class="form-group">
+                        <label for="useralbumphoto_prise">Quantity:</label>
+                        <div class="form-group-content">
+                            <input  name="quantity" class="k-textbox"  value="#:quantity#" type="number"  title="numeric" min="1" max="100" step="1"  required>
+                        </div>
+                       </div>
+                        <div class="form-group">
+                            <button type="submit" class="k-button k-primary">Update</button>
+                        </div>
+                    </div>
+                <img src="#=al_img#" alt="#: al_img# image" width="200" height="200" />
+                <p style="color:red;">Image Not Editabale*</p>
+                </div>
+                    </form>
+              
+    </script>
+        <script>
+            function myFunctionn(element) {
+                var imgid = $(element).attr('data-id');
+                $.ajax({
+                    url: "http://localhost:58979/AlbumStore/EditPhoto/" + imgid,
+                    type: "Get",
+                    dataType: 'json',
+                    success: function (result) {
+                        var objWin = $("#window");
+                        var template = kendo.template($("#edit").html());
+
+                        //undo.click(function () {
+                        //    objWin.data("kendoWindow").open();
+                        //    undo.fadeOut();
+                        //});
+
+                        //function onClose() {
+                        //    undo.fadeIn();
+                        //}
+                        objWin.kendoWindow({
+                            width: "500px",
+                            height: "600px",
+                            title: "EditPanel",
+                            model: true,
+                            content: result,
+                            visible: false,
+                            actions: ["close"],
+                            close: onclose,
+                        }).data("kendoWindow").content(template(result)).center().open();
+                    },
+                });
+            }
+        </script>
+
+        @*function viewDetails(element) {
+                var imgid = $(element).attr('data-id');
+                $.ajax({
+                    url: "http://localhost:58979/AlbumStore/PhotoDetail?id=" + imgid,
+                    type: "Get",
+                    dataType: 'json',
+                    success: function (result) {
+                        var mywindow = $("#window");
+                        var template = kendo.template($("#imagedetails").html());
+                        mywindow.kendoWindow({
+                            //width: "500px",
+                            //height: "600px",
+                            title: "Paint Details",
+                            model: true,
+                            content: result,
+                            visible: false,
+                            actions: ["close"],
+                            close: onclose,
+                        }).data("kendoWindow").content(template(result)).center().open();
+                    },
+                    error: function (exception) {
+                        alert("Fail");
+                    }
+                });
+            }*@

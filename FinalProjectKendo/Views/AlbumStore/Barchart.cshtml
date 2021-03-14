@@ -1,0 +1,155 @@
+﻿
+@{
+    ViewBag.Title = "Barchart";
+}
+
+<h2>Barchart</h2>
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <style>
+        html {
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+    <title></title>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default-v2.min.css" />
+
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/jquery.min.js"></script>
+
+
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js"></script>
+
+
+
+</head>
+<body>
+
+   <div id="chart" style="width: 200px;"></div>
+    <script>
+       
+    $("#chart").kendoChart({
+        dataSource: {
+            transport: {
+                read: {
+                    url: "http://localhost:58979/AlbumStore/sellData",
+                    dataType: "json"
+                }
+
+            } },
+      series: [{
+          type: "pie",
+          field: "cart_itemqua",
+          categoryField: "a_title",
+          autoFit: true,
+          labels: {
+            color: "#000",
+            position: "outsideEnd",
+
+            visible: true
+          }
+      }],
+      legend: {
+        visible: false
+      }
+    });
+    </script>
+
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @*<div id="example">
+        <div class="demo-section k-content wide">
+            <div id="chart"></div>
+        </div>
+        <script>
+            function createChart() {
+                $("#chart").kendoChart({
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: "http://localhost:58979/AlbumStore/checkoutdata",
+                                dataType: "json"
+                            }
+                        },
+                        sort: {
+                            field: "year",
+                            dir: "asc"
+                        }
+                    },
+                    title: {
+                        text: "Gross domestic product growth /GDP annual %/"
+                    },
+                    legend: {
+                        position: "top"
+                    },
+                    seriesDefaults: {
+                        type: "column"
+                    },
+                    series: [{
+                        name: "shipdate",
+                        field: "shipdate"
+
+                    }, {
+                        name: "totalprice",
+                        field: "totalprice"
+                    }, ],
+                    valueAxis: {
+                        labels: {
+                            format: "{0}%"
+                        },
+                        line: {
+                            visible: false
+                        },
+                        axisCrossingValue: 0
+                    },
+                    categoryAxis: {
+                        //categories: [shipdate, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
+                        line: {
+                            visible: false
+                        },
+                        labels: {
+                            padding: { top: 135 }
+                        }
+                    },
+                    tooltip: {
+                        visible: true,
+                        format: "{0}%",
+                        template: "#= series.name #: #= series.field #"
+                    }
+                });
+            }
+
+            $(document).ready(createChart);
+            $(document).bind("kendo:skinChange", createChart);
+        </script>*@
+
+</body>
+</html>

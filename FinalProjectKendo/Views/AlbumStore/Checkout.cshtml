@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<style>
+    #center1 {
+        margin: auto;
+        width: 60%;
+        padding: 10px;
+    }
+</style>
+<script>
+    document.getElementById('nav101').style.display = 'none';
+    $(document).ready(function () {
+        $("#datepicker").kendoDatePicker();
+        //$("#ValidateForm").kendoValidator().data("kendoValidator");
+        });
+</script>
+@*<div class="notification-box">
+    <div class='notification-alert alert  success'>
+        <div class='pull-left'><i class='icon-check'></i></div>
+        <div class='pull-right'>
+            <h5>Success!</h5>
+            <p>@ViewBag.message1</p>
+        </div>
+        <a class='close'><i class='icon-cancel'></i></a>
+    </div>
+</div>
+
+<div class="notification-box">
+    <div class='notification-alert alert danger'>
+        <div class='pull-left'><i class='icon-cancel'></i></div>
+        <div class='pull-right'>
+            <h5>Failed!</h5>
+            <p>@ViewBag.message2</p>
+        </div>
+        <a class='close'><i class='icon-cancel'></i></a>
+    </div>
+</div>*@
+<div class="container pd-0" id="center1">
+  
+        <form id="ValidateForm" method="post" action="/AlbumStore/Checkout">
+            <h2>
+                Checkout 
+            </h2><div style="background-color:orangered;width:140px;height:4px;"></div>
+            <hr />
+           @*<div class="row">
+               <div class="col-lg-6">
+                   <div class="form-group">
+                       <label for="first_name">First Name:</label>
+                       <div class="form-group-content">
+                           <input type="text" name="firstnm" class="k-textbox" placeholder="John" title="textbox" required>
+                       </div>
+                   </div>
+               </div>
+               <div >
+                   <div class="form-group">
+                       <label for="last_name">Last Name</label>
+                       <div class="form-group-content">
+                           <input type="text" class="k-textbox" name="lastnm" placeholder="Leo" title="textbox" required>
+                       </div>
+                   </div>
+               </div>
+           </div>*@
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <div class="form-group-content">
+                        <input type="text" name="firstnm" class="k-textbox" placeholder="John" title="textbox" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <div class="form-group-content">
+                        <input type="text" class="k-textbox" name="lastnm" placeholder="Leo" title="textbox" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <div class="form-group-content">
+                        <textarea class="k-textbox" name="address"  required></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <div class="form-group-content">
+                        <input type="text" class="k-textbox" name="state" placeholder="Maharashrta" title="textbox" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="postalcode">Pin Code:</label>
+                    <div class="form-group-content">
+                        <input type="text" class="k-textbox" name="postalcode" maxlength="6" placeholder="Pin Code" title="textbox" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Mobile Number</label>
+                    <div class="form-group-content">
+                        <input type="text" class="k-textbox" name="mobile" placeholder="8806416475" title="textbox" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <div class="form-group-content">
+                        <input type="email" class="k-textbox" name="email" placeholder="john@gmail.com" title="textbox" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ship_date">Ship Date</label>
+                    <div class="form-group-content">
+                        <input id="datepicker" name="shipdate" title="date picker" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="totalprise">Total Prise:</label>
+                    <div class="form-group-content">
+                        <p id="totalprise">@ViewBag.totalprise.00$</p>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn k-primary k-button">Submit</button>
+                </div>
+
+          
+        </form>
+    
+    <script>
+        $(document).ready(function () {
+            var today = new Date(new Date().getTime() + (15 * 24 * 60 * 60 * 1000));
+
+            var lastDate = new Date(today.getFullYear(), today.getMonth() + 3,
+                           today.getDate());
+            $("#datepicker").kendoDatePicker({
+                min: today,
+                max: lastDate
+            });
+
+        });
+    </script>
+    </div>

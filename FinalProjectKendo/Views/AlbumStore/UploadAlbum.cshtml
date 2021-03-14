@@ -1,0 +1,58 @@
+﻿@model FinalProjectKendo.Models.AlbumData
+
+@{
+    ViewBag.Title = "UploadAlbum";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<style>
+    #center1 {
+        margin: auto;
+        width: 60%;
+        padding: 10px;
+    }
+</style>
+<div class="mt-container pd-0" id="center1">
+    <div class="form-login">
+        <form action="/AlbumStore/UploadAlbum" method="post" enctype="multipart/form-data">
+            <h4 class="text-left">Upload Album</h4><div style="background-color:orangered;width:150px;height:4px;"></div>
+            <hr />
+            <div class="form-group">
+                <label for="al_img"></label>
+                <input name="al_img" class="files" type="file" aria-label="files" title="files" />
+            </div>
+          
+            <div class="form-group">
+                <label for="useralbumphoto_artist">Artist Name:</label>
+                <div class="form-group-content">
+                    <input type="text" name="a_artist" class="k-textbox" placeholder="John" title="textbox" required>
+                </div>
+            </div>
+            @*<div id="artist_name" class="form-group">
+                    <input type="text" class="k-textbox" name="useralbumphoto_artist" placeholder="Artist Name" required>
+                </div>*@
+            <div class="form-group">
+                <label for="useralbumphoto_name">Photo Name:</label>
+                <div class="form-group-content">
+                    <input type="text" name="a_title" class="k-textbox" placeholder="Nature" title="textbox" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="useralbumphoto_prise">Price:</label>
+                <div class="form-group-content">
+                    <input type="text" name="a_price" class="k-textbox" placeholder="500" title="textbox" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <div class="form-group-content">
+                    <input type="text" name="quantity" class="k-textbox" placeholder="500" title="textbox" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn k-primary k-button btn-sm">Add Photo</button>
+            </div>
+        </form>
+    </div>
+</div>

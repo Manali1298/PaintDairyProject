@@ -1,0 +1,258 @@
+﻿@*<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>*@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html {
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .navbar .second-navbar {
+            margin-top: 60px;
+        }
+
+        .navbar .navbar-link {
+            color: orangered;
+        }
+        .ime{
+            padding-right:1000px;
+        }
+    </style>
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js" />
+
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.common.min.css" />
+
+
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/jquery.min.js"></script>
+
+
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default-v2.min.css" />
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.aspnetmvc.min.js"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        @*<div id="ime"><img src="~/Uploadalbum/cp-logo.png" width="30px" height="30" /></div>*@
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Welcome To PaintDairy", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav"></ul>
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <div class="navbar second-navbar ">
+
+
+        <div id="example">
+
+            <ul id="menu">
+                <li>
+                    <a href="/Home/Index">Dashboard</a>
+                </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        <a>@User.Identity.Name</a>
+                        <ul>
+                            <li>MyAccount</li>
+                            <li><a href="/User/SignOut">SignOut</a></li>
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        Action
+                        <ul>
+                            <li>
+                                Admin
+                                <ul>
+
+                                    <li><a href="/User/LoginPanel">SignIn</a></li>
+                                  
+                                </ul>
+
+
+                            </li>
+                            <li>
+                                User
+                                <ul>
+                                    <li><a href="/User/LoginPanel">SignIn</a></li>
+                                    <li><a href="/User/RegisterPanel">Register</a></li>
+                                </ul>
+                            </li>
+
+
+                        </ul>
+                    </li>
+                   
+
+
+
+
+                }
+                @*<li>
+                    @Html.Partial("_ShoppingCart")
+                </li>*@
+            </ul>
+        </div>
+        <style>
+            #menu h2 {
+                font-size: 1em;
+                text-transform: uppercase;
+                padding: 5px 10px;
+            }
+
+
+            #template {
+                width: 380px;
+            }
+
+                #template ol {
+                    float: left;
+                    margin: 0 0 0 30px;
+                    padding: 10px 10px 0 10px;
+                }
+
+                #template:after {
+                    content: ".";
+                    display: block;
+                    height: 0;
+                    clear: both;
+                    visibility: hidden;
+                }
+
+                #template .k-button {
+                    float: left;
+                    clear: left;
+                    margin: 5px 0 5px 12px;
+                }
+        </style>
+        <script>
+            $(document).ready(function() {
+                $("#menu").kendoMenu();
+            });
+        </script>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Happy MiniStore...!!!!</p>
+        </footer>
+    </div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+@*<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js" />
+
+<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.common.min.css" />
+
+
+<script src="~/Kendo/Script/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2020.3.1118/js/jquery.min.js"></script>
+<script src="~/Kendo/Script/kendo.all.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default-v2.min.css" />
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.aspnetmvc.min.js"></script>*@

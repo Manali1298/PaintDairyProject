@@ -1,0 +1,336 @@
+﻿@model IEnumerable<FinalProjectKendo.Models.AlbumData>
+
+@{
+    ViewBag.Title = "AlbumList";
+    //Layout = null;
+
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">*@
+    <script src="~/Kendo/Script/jquery.min.js"></script>
+    <script src="~/Kendo/Script/kendo.all.min.js"></script>
+    <script src="~/Kendo/Script/kendo1.all.min.js"></script>
+    @*<script src="~/Scripts/Customer.js"></script>*@
+    <style>
+        html {
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+    <title></title>
+   
+
+
+</head>
+<body>
+    <div class="Div1">
+        <div id="example">
+            <h4>
+               Paint Gallery
+            </h4><div style="background-color:orangered;width:110px;height:4px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif"></div>
+            <hr />
+
+
+
+
+
+            <div id="window"></div>
+            <div id="listView"></div>
+            <div id="pager" class="k-pager-wrap"></div>
+
+            <script type="text/x-kendo-template" id="template">
+                <div class="product">
+                    <a href="javascript:void(0);" data-id="#:a_id#" onclick="viewDetails(this)">
+                      @*<a href="http://localhost:58979/AlbumStore/PhotoDetail?id=#:a_id#" data-id="#:a_id#">*@
+                            <img src="#=al_img#" alt="#: al_img# image" width="200" height="200" />
+                           
+                            <h5 style="color:black;">#:a_title#</h5>
+                            <h5>#:a_artist#</h5>
+
+
+                            <p>#:kendo.toString(a_price, "c")#</p>
+
+                        </a>
+                 </div>
+
+            </script>
+            <script>
+ 
+                $(document).ready(function () {
+                    var dataSource = new kendo.data.DataSource({
+                        transport: {
+                            read: {
+                                url: "http://localhost:58979/AlbumStore/GetUserData",
+                                dataType: "json",
+                                type: "Get"
+                            }
+                        },
+                        pageSize: 10,
+                    });
+                    $("#pager").kendoPager({
+                        dataSource: dataSource
+                    });
+
+                    $("#listView").kendoListView({
+                        dataSource: dataSource,
+                        template: kendo.template($("#template").html())
+                    });
+                });
+            </script>
+            <script type="text/x-kendo-template" id="imagedetails">
+                <input type="hidden" value="#:a_id#" id="hdnalbid" />
+                <input type="hidden" value="#:a_price#" id="hdnprice" />
+                <div class="row">
+                    <div class="col-lg-5" @*id="addiamge"*@>
+                        <br />
+                        <br />
+                        <img src="#:al_img#" id="imgalbumb" alt="#:al_img#" style="width:150px;height:150px" onmouseover="inc()" onmouseout="dec()" />
+                    </div>
+                    <div @*id="addiamge"*@ class="col-lg-3">
+                        
+                          
+                        <h5>
+                            <b>Title : #:a_title#</b></h5>
+                      
+                        <hr />
+                        <h5>
+                            <b>Artist by <span style="color:gray;">#:a_artist#</span> </b>
+                        </h5>
+                        <hr />
+                        <b>$<label id="lblimageamount">#:kendo.toString(a_price)#</label></b>
+                        *  <input id="txtQuantity" class="k-textbox" type="number" value="1" onchange="getTotal()" title="numeric" min="1" max="100" step="1" style="width:60px;">
+
+
+                        <hr />
+                        <b>$</b>
+                        <label id="lblTotalAmount">#:kendo.toString(a_price) # </label>
+                        <br>
+                        <label id="success"></label>
+                        <br>
+                        @*<a type="button" class="btn btn-icn-hover btn-icn-trans text-muted drawer-open edit-details " id="edit" href="http://localhost:58979/AlbumStore/EditPhoto?id=#:a_id#"><span class="k-icon k-i-pencil"></span></a>*@
+                        <a  id="btnAddCart" data-toggle="tooltip" data-placement="bottom" title="Buy Product" onclick="addCard()" style="color:orangered;"><span class="k-icon k-i-cart k-icon-32"></span></a>
+                    </div>
+                </div>
+            </script>
+            </div>
+        </div>
+
+            
+          
+       
+     
+
+            <style>
+              .k-icon-32 {
+        font-size: 32px; /* Sets icon size to 48px */
+    }
+
+                #listView {
+                    padding: 10px 5px;
+                    margin-bottom: -1px;
+                    min-height: 560px;
+                }
+
+                .k-listview-content {
+                    overflow: hidden;
+                }
+
+                .product {
+                    float: left;
+                    position: relative;
+                    width: 111px;
+                    height: 220px;
+                    margin: 0 5px;
+                    padding: 0;
+                }
+
+                    .product img {
+                        width: 110px;
+                        height: 110px;
+                    }
+
+                    .product h3 {
+                        margin: 0;
+                        padding: 3px 5px 0 0;
+                        max-width: 96px;
+                        overflow: hidden;
+                        line-height: 1.1em;
+                        font-size: .9em;
+                        font-weight: normal;
+                        text-transform: uppercase;
+                        color: #999;
+                    }
+
+                    .product p {
+                        visibility: hidden;
+                    }
+
+                    .product:hover p {
+                        visibility: visible;
+                        position: absolute;
+                        width: 110px;
+                        height: 110px;
+                        top: 0;
+                        margin: 0;
+                        padding: 0;
+                        line-height: 110px;
+                        vertical-align: middle;
+                        text-align: center;
+                        color: #fff;
+                        background-color: rgba(0,0,0,0.75);
+                        transition: background .2s linear, color .2s linear;
+                        -moz-transition: background .2s linear, color .2s linear;
+                        -webkit-transition: background .2s linear, color .2s linear;
+                        -o-transition: background .2s linear, color .2s linear;
+                    }
+
+                .k-listview:after {
+                    content: ".";
+                    display: block;
+                    height: 0;
+                    clear: both;
+                    visibility: hidden;
+                }
+            </style>
+       
+
+    </body>
+
+    </html>
+
+
+<script>
+    $("#txtQuantity").kendoNumericTextBox();
+
+    function viewDetails(element) {
+        var imgid = $(element).attr('data-id');
+        $.ajax({
+            url: "http://localhost:58979/AlbumStore/PhotoDetail?id=" + imgid,
+            type: "Get",
+            dataType: 'json',
+            success: function (result) {
+                var mywindow = $("#window");
+                var template = kendo.template($("#imagedetails").html());
+                mywindow.kendoWindow({
+                    //width: "500px",
+                    //height: "600px",
+                    title: "Paint Details",
+                    model: true,
+                    content: result,
+                    visible: false,
+                    actions: ["close"],
+                    close: onclose,
+                }).data("kendoWindow").content(template(result)).center().open();
+            },
+            error: function (exception) {
+                alert("Fail");
+            }
+        });
+    }
+
+    $("#txtQuantity").change(function () {
+        var quantity = $("txtQuantity").val();
+        var price = $("#hdnprice").val();
+
+    });
+    function onclose() {
+        var myWindow = $("#window").data("kendoWindow");
+        myWindow.bind("close");
+    };
+
+    function addCard() {
+        var obj = {
+            Quantity: parseInt($("#txtQuantity").val()),
+            photo_id: parseInt($("#hdnalbid").val()),
+        };
+        $.ajax({
+            url: "/AlbumStore/AddCart",
+            type: "POST",
+            data: JSON.stringify(obj),
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                window.location.replace("/AlbumStore/ListcartData");
+
+            }, error: function (errormessage) {
+                window.location.replace("/AlbumStore/AlbumUserSideList");
+            }
+        });
+    }
+
+    function getTotal() {
+        var quantity = parseInt($("#txtQuantity").val());
+        var price = parseInt($("#hdnprice").val());
+        $("#lblTotalAmount").html(quantity * price);
+    }
+
+    function myPrice(id) {
+        var x = document.getElementById(id).value;
+        var y = parseInt(x);
+        var obj = {
+            photo_id: id,
+            cart_itemquantity: y,
+        }
+        $.ajax({
+            url: "/AlbumStore/UpdatePrise",
+            type: "POST",
+            data: JSON.stringify(obj),
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                window.location.replace("/AlbumStore/AlbumUserSideList");
+
+            }, error: function (errormessage) {
+                window.location.replace("/AlbumStore/AlbumUserSideList");
+            }
+        });
+       
+    }
+
+
+
+
+
+    var width = 150;
+    var diff = 2;
+    var intveral = 0;
+  //  document.getElementById("").style.width = width;
+    function inc()
+    {
+        setInterval(expand(), 20);
+    }
+    function dec() {
+        setInterval(shrink(), 20);
+    }
+    function expand()
+    {
+        if(width<300)
+        {
+            width = width + diff;
+            document.getElementById("imgalbumb").style.width= width;
+        }
+        else {
+            clearInterval(intveral);
+        }
+    }
+   
+    function shrink() {
+        if (width > 150) {
+            width = width - diff;
+            document.getElementById("imgalbumb").style.width = width;
+        }
+        else {
+            clearInterval(intveral);
+        }
+    }
+
+</script>
+
+
+

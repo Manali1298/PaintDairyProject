@@ -1,0 +1,47 @@
+﻿@model FinalProjectKendo.Models.AlbumData
+
+@{
+    ViewBag.Title = "EditPhoto";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<style>
+    #center1 {
+        margin: auto;
+        width: 60%;
+        padding: 10px;
+    }
+</style>
+<br />
+<br />
+<div class="mt-container pd-0" id="center1">
+<div class="form-login">
+    <form action="/AlbumStore/EditPhoto" method="post" enctype="multipart/form-data">
+        <h4 class="text-left">Update Album</h4><div style="background-color:orangered;width:150px;height:4px;"></div>
+<hr />
+     
+        <div class="form-group">
+            <label for="useralbumphoto_artist">Artist Name:</label>
+            <div class="form-group-content">
+                <input type="text" name="a_artist" class="k-textbox" placeholder="Manali" value="@Model.a_artist" title="textbox" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="useralbumphoto_name">Album Name:</label>
+            <div class="form-group-content">
+                <input type="text" name="a_title" class="k-textbox" placeholder="Nature" value="@Model.a_title" title="textbox" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="useralbumphoto_prise">Price:</label>
+            <div class="form-group-content">
+                <input type="text" name="a_price" class="k-textbox" placeholder="500" value="@Model.a_price" title="textbox" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="k-button k-primary">Update</button>
+        </div>
+    </form>
+</div>
+</div>
